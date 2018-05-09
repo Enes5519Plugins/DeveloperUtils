@@ -31,11 +31,38 @@ declare(strict_types=1);
 namespace Enes5519\DeveloperUtils;
 
 use Enes5519\DeveloperUtils\utils\TextUtils;
+use pocketmine\math\Vector3;
+use pocketmine\network\mcpe\protocol\SetSpawnPositionPacket;
+use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
 class DeveloperUtils extends PluginBase{
 
+	/** @var DeveloperUtils */
+	private static $api;
+
+	public function onLoad(){
+		self::$api = $this;
+	}
+
 	public function onEnable(){
+		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 		$this->getLogger()->info(TextUtils::rainbow("Plugin enabled"));
+	}
+
+	public static function getAPI() : DeveloperUtils{
+		return self::$api;
+	}
+
+	public static function setCompassDestination(Player $player, Vector3 $pos){
+		$pos = $pos->floor();
+
+		$pk = new SetSpawnPositionPacket();
+		$pk->spawnType = SetSpawnPositionPacket::TYPE_WORLD_SPAWN;
+		$pk->x = $pos->x;
+		$pk->y = $pos->y;
+		$pk->z = $pos->z;
+		$pk->spawnForced = false;
+		$player->dataPacket($pk);
 	}
 }
