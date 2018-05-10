@@ -5,6 +5,7 @@ Helpful APIs for Altay or pmmp developers.
 # APIs
 - [x] Schematic Loader
 - [x] TextUtils
-  - [x] rainbow
+- [x] SkinUtils
+- [x] LocationUtils
   
 ***more..***
