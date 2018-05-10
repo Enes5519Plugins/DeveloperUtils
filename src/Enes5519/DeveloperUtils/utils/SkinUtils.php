@@ -39,21 +39,20 @@ class SkinUtils{
 	 */
 	public static function getTextureFromFile(string $filename) : string{
 		assert(file_exists($filename));
-		$im = imagecreatefrompng($filename);
-		list($width, $height) = getimagesize($filename);
-		$bytes = "";
-		for($y = 0; $y < $height; $y++){
-			for($x = 0; $x < $width; $x++){
-				$argb = imagecolorat($im, $x, $y);
-				$a = ((~((int) ($argb >> 24))) << 1) & 0xff;
-				$r = ($argb >> 16) & 0xff;
-				$g = ($argb >> 8) & 0xff;
-				$b = $argb & 0xff;
-				$bytes .= chr($r) . chr($g) . chr($b) . chr($a);
+		$image = imagecreatefrompng($filename);
+		$data = '';
+		for($y = 0, $height = imagesy($image); $y < $height; $y++){
+			for($x = 0, $width = imagesx($image); $x < $width; $x++){
+				$color = imagecolorat($image, $x, $y);
+				$data .= pack("c", ($color >> 16) & 0xFF) //red
+					. pack("c", ($color >> 8) & 0xFF) //green
+					. pack("c", $color & 0xFF) //blue
+					. pack("c", 255 - (($color & 0x7F000000) >> 23)); //alpha
 			}
 		}
-		imagedestroy($im);
-		return $bytes;
+		imagedestroy($image);
+
+		return $data;
 	}
 
 }
