@@ -46,6 +46,8 @@ class DeveloperUtils extends PluginBase{
 	}
 
 	public function onEnable(){
+		@mkdir($this->getDataFolder());
+
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 		$this->getLogger()->info(TextUtils::rainbow("Plugin enabled"));
 	}
