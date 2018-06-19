@@ -28,7 +28,7 @@
 
 declare(strict_types=1);
 
-namespace Enes5519\DeveloperUtils\utils;
+namespace Enes5519\DeveloperUtils\level;
 
 use pocketmine\entity\Entity;
 use pocketmine\level\Position;
