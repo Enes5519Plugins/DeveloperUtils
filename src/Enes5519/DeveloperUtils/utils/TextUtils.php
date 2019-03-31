@@ -41,7 +41,15 @@ class TextUtils{
 		TextFormat::GREEN,
 		TextFormat::AQUA,
 		TextFormat::BLUE,
-		TextFormat::LIGHT_PURPLE
+		TextFormat::LIGHT_PURPLE,
+		TextFormat::BLACK,
+		TextFormat::WHITE,
+		TextFormat::DARK_BLUE,
+		TextFormat::DARK_GREEN,
+		TextFormat::DARK_AQUA,
+		TextFormat::DARK_RED,
+		TextFormat::DARK_PURPLE,
+		TextFormat::DARK_GRAY,
 	];
 
 	public static function rainbow(string $str) : string{
