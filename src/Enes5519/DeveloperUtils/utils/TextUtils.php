@@ -46,6 +46,7 @@ class TextUtils{
 
 	public static function rainbow(string $str) : string{
 		$text = str_split($str);
+		shuffle($text);
 		$i = -1;
 		foreach($text as $index => $char){
 			if($char == " ") continue;
